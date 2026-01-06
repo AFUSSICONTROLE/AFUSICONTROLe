@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinelle IA</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { margin:0; background:#000; color:#00d2ff; font-family:sans-serif; text-align:center; overflow:hidden; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+        @keyframes pulse { 0%,100% {transform:scale(1);} 50% {transform:scale(1.3); box-shadow:0 0 50px #ff00ff;} }
+        .zooming { animation: pulse 1s infinite; }
+        #photo { width:200px; height:200px; border-radius:50%; border:4px solid #00d2ff; object-fit:cover; display:none; }
+        #pin-screen { display:none; position:fixed; top:0; background:rgba(0,0,0,0.9); width:100%; height:100%; flex-direction:column; justify-content:center; align-items:center; z-index:100; }
+        .btn { border:1px solid #00d2ff; background:none; color:#00d2ff; padding:10px; border-radius:10px; margin-top:10px; }
+    </style>
+</head>
+<body>
+    <h1>SENTINELLE IA</h1>
+    <img id="photo" src="" alt="Ma Photo">
+    <div id="dist">-- CM</div>
+    <div id="msg">En attente...</div>
+    <input type="file" id="file" style="display:none" accept="image/*">
+    <button class="btn" onclick="document.getElementById('file').click()">CHOISIR MA PHOTO</button>
+
+    <div id="pin-screen">
+        <h2>ENTREZ PIN</h2>
+        <input type="password" id="pin-in" style="font-size:2rem; width:100px; text-align:center;">
+        <button class="btn" onclick="checkPin()">VALIDER</button>
+    </div>
+
+    <script>
+        let pin = "1234";
+        const photo = document.getElementById('photo');
+        
+        document.getElementById('file').onchange = e => {
+            const reader = new FileReader();
+            reader.onload = () => { photo.src = reader.result; photo.style.display="block"; };
+            reader.readAsDataURL(e.target.files[0]);
+        };
+
+        function parler(t) {
+            const u = new SpeechSynthesisUtterance(t);
+            u.lang = 'fr-FR'; window.speechSynthesis.speak(u);
+            document.getElementById('msg').innerText = t;
+        }
+
+        async function updateIA(d) {
+            document.getElementById('dist').innerText = d + " CM";
+            // Remplacer l'URL ci-dessous après création du compte Render
+            const res = await fetch('https://URL_DE_VOTRE_SERVEUR_RENDER/update', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({distance: d})
+            });
+            const data = await res.json();
+            
+            if(data.zoom) photo.classList.add('zooming');
+            else photo.classList.remove('zooming');
+            
+            if(data.alerte) document.getElementById('pin-screen').style.display='flex';
+            
+            parler(data.message);
+        }
+
+        function checkPin() {
+            if(document.getElementById('pin-in').value === pin) {
+                document.getElementById('pin-screen').style.display='none';
+                parler("Sécurité levée.");
+            }
+        }
+    </script>
+</body>
+</html>
