@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ffd700">
+    <title>Ludo Trésor IA - Innovation Lemonfa Afussi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-LEMONFA" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <header id="main-header">
+        <img src="amazone.jpg" alt="Amazone du Bénin" class="amazone-icon">
+        
+        <div class="brand-container">
+            <h1 class="brand-title">Ludo Trésor IA</h1>
+            <p>Innovateur : <strong>Mr Lemonfa Afussi</strong></p>
+        </div>
+
+        <img src="votre-photo.png" alt="Lemonfa Afussi" class="owner-photo">
+    </header>
+
+    <div id="live-news-ticker">DIRECT : Bienvenue sur la plateforme officielle de l'innovation Béninoise.</div>
+
+    <section id="welcome-screen">
+        <div class="card">
+            <h2>Bienvenue dans l'Excellence</h2>
+            <p>Découvrez l'histoire et la richesse du Bénin à travers le génie technologique.</p>
+            
+            <div class="access-box" style="margin-bottom: 20px;">
+                <input type="password" id="access-code" placeholder="Code d'accès (229)" style="padding: 10px; border-radius: 5px; border: 1px solid #ffd700; text-align: center;">
+            </div>
+
+            <button class="btn-main" onclick="verifierAccesDirect()">ENTRER DANS L'INNOVATION</button>
+        </div>
+    </section>
+
+    <section id="auth-section" class="hidden">
+        <div id="fingerprint-scanner">
+            <span class="finger-icon">☝️</span>
+        </div>
+        <p id="status-text">Analyse biométrique sécurisée Lemonfa...</p>
+        <div class="auth-grid">
+            <button onclick="requestRegistration()">S'enregistrer</button>
+        </div>
+    </section>
+
+    <section id="player-dashboard" class="hidden">
+        <h2 id="player-greeting">Bonjour Citoyen</h2>
+        <div id="score-card">Gains : <span id="player-score-val">0</span> Jetons</div>
+        
+        <div id="narration-box">Prêt pour une nouvelle leçon d'histoire ?</div>
+
+        <div class="menu-grid">
+            <button class="menu-btn" onclick="showScreen('ludo-game-section')">🎲 LUDO NATIONAL</button>
+            <button class="menu-btn" onclick="startHeritageQuiz()">🏛️ QUIZ PATRIMOINE (Bénin)</button>
+            <button class="menu-btn" onclick="chanterAubeNouvelle()">🎵 HYMNE NATIONAL</button>
+        </div>
+        
+        <div class="admin-actions" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn-donate" onclick="supportCreator()">Soutenir Mr Lemonfa (FedaPay/MTN)</button>
+            <button class="btn-config" onclick="configurerLienSoutien()" style="background: #333; color: white; border: none; padding: 5px; font-size: 0.8em; border-radius: 5px;">🔧 Configurer Lien (PIN requis)</button>
+        </div>
+    </section>
+
+    <section id="ludo-game-section" class="hidden">
+        <div class="game-box">
+            <div id="ludo-dice-display">
+                <span id="ludo-dice-value">?</span>
+            </div>
+            <button class="btn-main" onclick="rollLudoDice()">LANCER LE DÉ</button>
+        </div>
+        <button class="btn-back" onclick="backToDashboard()">RETOUR</button>
+    </section>
+
+    <section id="amazone-game-section" class="hidden">
+        <div id="game-explanation-text" class="info-box"></div>
+        <div id="amazone-options" class="options-container"></div>
+        <button class="btn-back" onclick="backToDashboard()">RETOUR</button>
+    </section>
+
+    <section id="admin-panel" class="hidden">
+        <div class="admin-card">
+            <h2>💰 COMPTE PRIVÉ LEMONFA</h2>
+            <p>Utilisateurs Actifs : <span id="admin-user-count">0</span></p>
+            <p>Trésorerie Virtuelle : <span id="admin-balance-val">0</span> Jetons</p>
+            <hr>
+            <p>Statut : Système Lemonfa Intègre ✅</p>
+            <button onclick="backToDashboard()">FERMER LE COFFRE</button>
+        </div>
+    </section>
+
+    <div id="offline-overlay" class="hidden">
+        <div class="msg">
+            ⚠️ Connexion Requise : Le système de Monsieur Lemonfa nécessite un accès réseau pour valider vos jetons.
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
