@@ -19,8 +19,8 @@ if not st.session_state.pin_auth:
     st.stop()
 
 # --- RÉCUPÉRATION DES CLÉS ---
-TOMTOM_API_KEY = st.secrets.get("TOMTOM_API_KEY", "")
-GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", "")
+TOMTOM_API_KEY = st.secrets.get("3OTE8jwFHsjSlVPg59bm6BVzPvxEANob", "")
+GEMINI_API_KEY = st.secrets.get("AIzaSyCTgsjZJilsudlmXK9Nu7GKup0_N9Wra70", "")
 
 if not TOMTOM_API_KEY or not GEMINI_API_KEY:
     st.warning("⚠️ Configuration de sécurité requise.")
